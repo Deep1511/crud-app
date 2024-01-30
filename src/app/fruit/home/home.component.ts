@@ -19,12 +19,19 @@ export class HomeComponent implements OnInit{
   }
 
 
-  deleteItem(id:number){
-    this.fruitService.delete(id).subscribe({
-      next:(data)=>{
-        this.allfruits=this.allfruits.filter(_=>_.id!=id)
-      },
-    })
+  deleteItem(id: string): void {
+      this.fruitService.delete(+id).subscribe({
+        next: () => {
+          console.log('Fruit deleted successfully:', id);
+          this.allfruits = this.allfruits.filter(fruit => fruit.id !== id.toString());
+
+        },
+      error: (err) => {
+        console.error('Error deleting fruit:', err);
+        // Display error information in the UI or log it for debugging
+      }
+    });
   }
+  
 
 }

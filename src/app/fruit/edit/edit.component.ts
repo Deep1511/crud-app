@@ -12,14 +12,12 @@ import { FruitService } from '../fruit.service';
 export class EditComponent  implements OnInit{
 
   formdata : Fruit={
-    id:0,
+    id:'',
     name:'',
     quantity:0,
     price:0
   }
-  constructor(private fruitService:FruitService,private router:Router,private route:ActivatedRoute) {
-    
-  }
+  constructor(private fruitService:FruitService,private router:Router,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((param)=>{
@@ -37,6 +35,7 @@ export class EditComponent  implements OnInit{
   update(){
     this.fruitService.update(this.formdata).subscribe({
       next:(data)=>{
+        alert("Update Success fully")
         this.router.navigate(["fruit/home"])
       },
       error:(er)=>{
